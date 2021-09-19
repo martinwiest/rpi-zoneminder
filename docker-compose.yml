@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+    mysql:
+     image: "jsurf/rpi-mariadb"
+     container_name: zoneminder_db
+     restart: always
+     volumes:
+     - "/mnt/zoneminder/mysql:/var/lib/mysql"
+     ports:
+     - "3306:3306"
+     environment: 
+       - TZ=Europe/Berlin
+       - MYSQL_ROOT_PASSWORD=zmpass
+       - MYSQL_USER=zmuser
+       - MYSQL_PASSWORD=zmpass
+       - MYSQL_DATABASE=zm
+    zoneminder: 
+     image: "martinwiest/rpi-zoneminder:latest"
+     container_name: zoneminder
+     restart: always
+     ports: 
+     - "80:80"
+     - "9000:9000"
+     - "6802:6802"
+     volumes:
+     - "/mnt/zoneminder/data:/mnt/zoneminder/data:rw"
+     environment:
+      - TZ=Europe/Berlin
+      - ZM_DB_HOST=mysql
+     shm_size: "7gb"
