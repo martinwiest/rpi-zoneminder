@@ -1,7 +1,7 @@
 version: '3.3'
 services:
     mysql:
-     image: "jsurf/rpi-mariadb"
+     image: "mariadb:10.7"
      container_name: zoneminder_db
      restart: always
      volumes:
