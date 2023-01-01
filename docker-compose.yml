@@ -8,16 +8,21 @@ services:
      - "mysql:/var/lib/mysql"
      ports:
      - "3306:3306"
-     environment: 
-       - TZ=Europe/Berlin
-       - MYSQL_ROOT_PASSWORD=zmpass
-       - MYSQL_USER=zmuser
-       - MYSQL_PASSWORD=zmpass
-       - MYSQL_DATABASE=zm
+     env_file:
+      - ./config
     zoneminder: 
-     image: "martinwiest/rpi-zoneminder:latest"
      container_name: zoneminder
      restart: always
+     env_file:
+      - ./config
+     image: rpi-zoneminder:latest
+     build:
+      context: ./
+      args:
+       ZM_DB_HOST: ${ZM_DB_HOST}
+       ZM_DB_NAME: ${ZM_DB_NAME}
+       ZM_DB_USER: ${ZM_DB_USER}
+       ZM_DB_PASS: ${ZM_DB_PASS}
      ports: 
      - "8080:80"
      - "9000:9000"

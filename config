@@ -1,0 +1,11 @@
+# Change the credentials to your needs
+TZ=Europe/Berlin
+MYSQL_ROOT_PASSWORD="changeit"
+MYSQL_USER="zmuser"
+MYSQL_PASSWORD="zmpass"
+MYSQL_DATABASE="zm"
+
+ZM_DB_HOST="127.0.0.1"
+ZM_DB_NAME="${MYSQL_DATABASE}"
+ZM_DB_USER="${MYSQL_USER}"
+ZM_DB_PASS="${MYSQL_PASSWORD}"
